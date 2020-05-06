@@ -34,7 +34,7 @@ pipeline {
             }
             steps {
             	echo "AWS Region is ${env.REGION}"
-                withAWS(credentials: 'aws-credentials', region: env.REGION) {
+                withAWS(credentials: 'aws-credentials', region: ap-southeast-2) {
                     sh './gradlew awsCfnMigrateStack awsCfnWaitStackComplete -PsubnetId=$SUBNET_ID -PdockerHubUsername=$DOCKER_HUB_LOGIN_USR --stacktrace'
                 }
             }
