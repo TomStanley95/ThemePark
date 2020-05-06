@@ -17,6 +17,8 @@ plugins {
     id 'com.palantir.docker-run' version '0.25.0'
 }
 
+version = scmVersion.version
+
 repositories {
     // Use jcenter for resolving dependencies.
     // You can declare any Maven/Ivy/file repository here.
@@ -46,7 +48,7 @@ test {
 }
 
 String dockerHubUsernameProperty = findProperty('dockerHubUsername') ?: 'dockstan56'
-String imageName = "${dockerHubUsernameProperty}/ThemePark:$version"
+String imageName = "${dockerHubUsernameProperty}/themepark:$version"
 
 docker {
     name imageName
