@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+    triggers {
+        pollSCM '* * * * *'
+    }
+    stages {
+       
+        stage('Teardown from AWS') {            
+            steps {
+            	echo "AWS Region is ${env.REGION}"
+                withAWS(credentials: 'aws-credentials', region: 'ap-southeast-2') {
+                   	sh './gradlew awsCfnDeleteStack awsCfnWaitStackComplete'
+                }
+            }
+        }
+    }
+}
